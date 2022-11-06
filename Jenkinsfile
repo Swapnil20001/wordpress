@@ -11,22 +11,22 @@ pipeline{
              }
            
         }
-        stage{"deploy to remote"}{
+        stage("deploy to remote"){
             steps{
                 sh 'scp ${WORKSPACE}/* ubuntu@${staging_server}:/var/www/html/wordpress'
             }  
         } 
-        stage{"change nginx configuration file"}{
+        stage("change nginx configuration file"){
             steps{
                 sh 'rm -rf ubuntu@${staging_server}:/etc/nginx/sites-enabled/*' 
             }
         }
-        stage{"copy nginx configure file from github"}{
+        stage("copy nginx configure file from github"){
             steps{
                 sh 'scp ${wordpress} ubuntu@${staging_server}:/etc/nginx/sites-enabled/*' 
             }
         }
-        stage{"restart nginx"}{
+        stage("restart nginx"){
             steps{
                 sh 'service nginx restart ubuntu@${staging_server}'
         }
