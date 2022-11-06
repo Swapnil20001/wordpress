@@ -14,7 +14,8 @@ pipeline{
         }
         stage("deploy to remote"){
             steps{
-                sh 'scp ${WORKSPACE}/* ubuntu@${staging_server}:/var/www/html/wordpress'
+                sh 'scp -o StrictHostKeyChecking=no ${WORKSPACE}/* ubuntu@${staging_server}:/var/www/html/wordpress'
+        
             }  
         } 
         stage("change nginx configuration file"){
