@@ -6,7 +6,10 @@ pipeline{
     }
     stages{
          stage('Git Checkout'){
-           git 'https://github.com/Swapnil20001/wordpress.git '
+             steps{
+                 git 'https://github.com/Swapnil20001/wordpress.git '
+             }
+           
         }
         stage{"deploy to remote"}{
             steps{
