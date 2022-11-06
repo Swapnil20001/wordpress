@@ -1,0 +1,31 @@
+pipeline{
+    agent any
+    environment{
+        staging_server = "IP"
+
+    }
+    stages{
+        stage{"deploy to remote"}{
+            steps{
+                sh 'scp ${WORKSPACE}/* ubuntu@${staging_serverIP}:/var/www/html/wordpress'
+            }  
+        } 
+        stage{"change nginx configuration file"}{
+            steps{
+                sh 'rm -rf ubuntu@IP:/etc/nginx/sites-enabled/*' 
+            }
+        }
+        stage{"copy nginx configure file from github"}{
+            steps{
+                sh 'scp ${wordpress} ubuntu@IP:/etc/nginx/sites-enabled/*' 
+            }
+        }
+        stage{"restart ngin"}{
+            steps{
+                sh 'service nginx restart ubuntu@IP ' 
+            }
+        }
+    }
+
+    
+}
