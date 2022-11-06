@@ -16,7 +16,7 @@ pipeline{
             steps{
                 sshagent(['15.206.168.12']){
          
-                sh 'scp -o StrictHostKeyChecking=no ${WORKSPACE}/* ubuntu@${staging_server}:/var/www/html/wordpress'
+                sh 'scp -o StrictHostKeyChecking=no ${WORKSPACE}/wordpress ubuntu@${staging_server}:/var/www/html/'
                 
                 }
             }  
