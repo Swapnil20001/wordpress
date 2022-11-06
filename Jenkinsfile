@@ -14,8 +14,11 @@ pipeline{
         }
         stage("deploy to remote"){
             steps{
+                sshagent(['15.206.168.12']){
+         
                 sh 'scp -o StrictHostKeyChecking=no ${WORKSPACE}/* ubuntu@${staging_server}:/var/www/html/wordpress'
-        
+                
+                }
             }  
         } 
         stage("change nginx configuration file"){
