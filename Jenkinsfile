@@ -6,7 +6,7 @@ pipeline{
     }
     stages{
          stage('Git Checkout'){
-           git credentialsId: 'gitHub', url: 'https://github.com/Swapnil20001/wordpress.git '
+           git branch: 'main', credentialsId: 'swapnilshende9131@gmail.com', url: 'https://github.com/Swapnil20001/wordpress.git'
         }
         stage{"deploy to remote"}{
             steps{
