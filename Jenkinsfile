@@ -7,6 +7,7 @@ pipeline{
     stages{
          stage('Git Checkout'){
              steps{
+                 sh 'sudo rm -rf wordpress'
                  sh  'git clone https://github.com/Swapnil20001/wordpress.git '
              }
            
@@ -18,7 +19,7 @@ pipeline{
         } 
         stage("change nginx configuration file"){
             steps{
-                sh 'rm -rf ubuntu@${staging_server}:/etc/nginx/sites-enabled/*' 
+                sh 'sudo rm -rf ubuntu@${staging_server}:/etc/nginx/sites-enabled/*' 
             }
         }
         stage("copy nginx configure file from github"){
