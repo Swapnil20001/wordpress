@@ -15,8 +15,8 @@ pipeline{
         stage("deploy to remote"){
             steps{
                 sshagent(['15.206.168.12']){
-           
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@${staging_server} 'chown -R www-data:www-data /var/www/' "
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@${staging_server} 'rm -rf var/www/html/*'
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@${staging_server} 'chown -R www-data:www-data /var/www/html/wordpress' "
                 sh 'scp -o StrictHostKeyChecking=no ${WORKSPACE}/wordpress/* ubuntu@${staging_server}:/var/www/html/'
                 
                 }
